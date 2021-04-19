@@ -1,19 +1,34 @@
-/* Basic board is built
-To Do Next Time: center heading and game board, improve look of board (spaces too close to edge), add classes for player 1(red) and player 2(yellow), make gameboard size responsive?*/
+/*To Do Next Time:add responsiveness for portrait (board looks too small in portrait mode)*/
 
 .gameBoard {
-    height: 480px;
-    width: 560px;
-    border-radius: 1vw;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #2054ff;
+  margin: auto;
+  height: 30vw;
+  width: 35vw;
+  border-radius: 1vw;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #2054ff;
+  border: 1vw solid;
+  border-color: #2054ff;
 }
 
 .space {
-    border-radius: 50%;
-    background-color: #ffffff;
-    height: 72px;
-    width: 72px;
-    margin: auto;  
+  border-radius: 50%;
+  background-color: #ffffff;
+  height: 4.6vw;
+  width: 4.6vw;
+  margin: auto;
+}
+
+h1{
+    text-align: center;
+  font-size: 4vw;
+}
+
+.p1 {
+    background-color: #ff0000;
+}
+
+.p2 {
+    background-color: #ffd000;
 }
