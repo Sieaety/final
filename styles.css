@@ -1,5 +1,8 @@
 /*To Do Next Time:add responsiveness for portrait (board looks too small in portrait mode)*/
 
+
+
+/*gameboard background/blue area*/
 .gameBoard {
   margin: auto;
   height: 30vw;
@@ -12,6 +15,7 @@
   border-color: #2054ff;
 }
 
+/*individual spaces within board*/
 .space {
   border-radius: 50%;
   background-color: #ffffff;
@@ -25,6 +29,8 @@ h1{
   font-size: 4vw;
 }
 
+
+/*classes for changing space color based on current player*/
 .p1 {
     background-color: #ff0000;
 }
