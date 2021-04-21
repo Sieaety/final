@@ -1,25 +1,27 @@
-//TO DO NEXT: replace alert in loop with mouseover 
-currentPlayer = 1;
+//TO DO NEXT: begin coding functions for actual game play, start by making arrays spaces for individual columns and array of all of the columns together
+currentPlayer = 2;
 spaces = document.querySelectorAll(".space");
 
-/*testing function to change space color to current player color 
-when they hover over top left space on board 
-(before attempting to apply function to all spaces)*/
+/*looping through all spaces on the board*/
 
-if (currentPlayer == 1) {
-  document.querySelector(".first").onmouseover = function() {
-    document.querySelector(".first").classList.add("p1");
-  }
-  document.querySelector(".first").onmouseout = function() {
-    document.querySelector(".first").classList.remove("p1");
+for (let i = 0; i < spaces.length; i++) {
+  
+  /*changes color of space to the current player color when they hover over it*/
+
+  if (currentPlayer == 1) {
+    spaces[i].onmouseover = function() {
+      spaces[i].classList.add("p1");
+    }
+    spaces[i].onmouseout = function() {
+      spaces[i].classList.remove("p1");
+    }
+    
+  } else if (currentPlayer == 2) {
+    spaces[i].onmouseover = function() {
+      spaces[i].classList.add("p2");
+    }
+    spaces[i].onmouseout = function() {
+      spaces[i].classList.remove("p2");
+    }
   }
 }
-
-/*testing loop to see if it works before adding mouseover funciton*/
-
-    for (let i = 0; i < spaces.length; i++) {
-
-        spaces[i].onclick = () => {
-            alert("you have clicked space " + i)
-        }
-    }
