@@ -1,5 +1,6 @@
-//TO DO NEXT: write loop so mouseover fucntion works on all spaces
+//TO DO NEXT: replace alert in loop with mouseover 
 currentPlayer = 1;
+spaces = document.querySelectorAll(".space");
 
 /*testing function to change space color to current player color 
 when they hover over top left space on board 
@@ -13,3 +14,12 @@ if (currentPlayer == 1) {
     document.querySelector(".first").classList.remove("p1");
   }
 }
+
+/*testing loop to see if it works before adding mouseover funciton*/
+
+    for (let i = 0; i < spaces.length; i++) {
+
+        spaces[i].onclick = () => {
+            alert("you have clicked space " + i)
+        }
+    }
