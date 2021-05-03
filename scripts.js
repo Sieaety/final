@@ -14,12 +14,15 @@ col6 = [6, 13, 20, 27, 34, 41];
 //array of all columns
 allCol = [col0, col1, col2, col3, col4, col5, col6];
 
-//looping through all spaces on the board
 
+//looping through all spaces on the board
 for (let i = 0; i < spaces.length; i++) {
   
+  
+  //sets clickedSpace in colNum fuction to the space the player clicked on (space[i])
+  spaces[i].onclick = function () { colNum(i) };
+  
   //changes color of space to the current player color when they hover over it
-
   if (currentPlayer == 1) {
     spaces[i].onmouseover = function() {
       spaces[i].classList.add("p1");
@@ -36,4 +39,19 @@ for (let i = 0; i < spaces.length; i++) {
       spaces[i].classList.remove("p2");
     }
   }
+}
+
+
+/*loops through columns to find the one that includes the space the player clicked on and 
+then should run a function for placing the chip in that column*/
+function colNum(clickedSpace) {
+    for (let i = 0; i < allCol.length; i++) {
+        if (allCol[i].includes(clickedSpace)) {
+          
+//call function for placing chip here and then break the loop
+console.log(clickedSpace);
+        }
+
+
+    }
 }
