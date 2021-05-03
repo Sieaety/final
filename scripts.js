@@ -1,4 +1,4 @@
-//TO DO NEXT: function that detects space the user clicked
+//TO DO NEXT: function to update available space (detected by placeChip function) to player color 
 currentPlayer = 1;
 spaces = document.querySelectorAll(".space");
 
@@ -47,11 +47,38 @@ then should run a function for placing the chip in that column*/
 function colNum(clickedSpace) {
     for (let i = 0; i < allCol.length; i++) {
         if (allCol[i].includes(clickedSpace)) {
-          
-//call function for placing chip here and then break the loop
-console.log(clickedSpace);
+console.log(clickedSpace);        
+           placeChip(i);
+            break;
+
         }
 
 
+    }
+}
+
+//function for detecting where to place the chip in the clicked column
+function placeChip(colNumber) {
+  //loops through spaces in column from bottom to top (6 spaces: 5,4,3,2,1,0)
+    for (let i = 5; i > 0; i--) {
+      
+      //if it loops to the top space and it is filled then nothing happens
+        if (i == 0 && spaces[allCol[colNumber][i]].classList.contains("filled")) {
+            break;
+
+        }
+      
+      /*Detects bottomost availble space and places chip by checking if i is filled and if 
+      the spot above is not filled. If space above is not filled it will run function to update space with chip*/
+        else if (spaces[allCol[colNumber][i]].classList.contains("filled") && !spaces[allCol[colNumber][i -= 1]].classList.contains("filled")) {
+//function to update space here
+            break;
+        }
+      //if i is the bottom spot on the board and it isn't filled then run function for updating the space
+        else if (!spaces[allCol[colNumber][i]].classList.contains("filled") && i == 5) {
+//function to update space here
+   
+            break;
+        }
     }
 }
