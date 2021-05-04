@@ -1,7 +1,8 @@
-/*TO DO NEXT: fix errors, placeChip and updateSpace aren't running after columns have two filled spots
+/*TO DO NEXT: fix errors
 -Currently red mouseout works but also erases chips in filled spaces
 -Yellow mouseout doesn't work at all
--Only switches current player once from red to yellow and won't switch back or place any chips*/
+FIXED:Only switches current player once from red to yellow and won't switch back or place any chips- 
+Set i to a variable so variable value could later be subtracted from without changing the value of i*/
 
 currentPlayer = 1;
 
@@ -75,7 +76,8 @@ function colNum(clickedSpace) {
 function placeChip(colNumber) {
   //loops through spaces in column from bottom to top (6 spaces: 5,4,3,2,1,0)
   for (let i = 5; i > 0; i--) {
-
+    available = i;
+    console.log(i);
     //if it loops to the top space and it is filled then nothing happens
     if (i == 0 && spaces[allCol[colNumber][i]].classList.contains("filled")) {
       console.log("nani")
@@ -85,9 +87,9 @@ function placeChip(colNumber) {
 
     /*Detects bottomost availble space and places chip by checking if i is filled and if 
     the spot above is not filled. If space above is not filled it will run function to update space with chip*/
-    else if (spaces[allCol[colNumber][i]].classList.contains("filled") && !spaces[allCol[colNumber][i -= 1]].classList.contains("filled")) {
+    else if (spaces[allCol[colNumber][i]].classList.contains("filled") && !spaces[allCol[colNumber][available -= 1]].classList.contains("filled")) {
       console.log("help");
-      updateSpace(colNumber, i);
+      updateSpace(colNumber, available);
       break;
     }
     //if i is the bottom spot on the board and it isn't filled then run function for updating the space
