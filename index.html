@@ -23,9 +23,13 @@
 </head>
 
 <body>
+  
 
-  <h1>Connect 4</h1>
+  
 
+  <h1>Conn<span onclick="easterEgg()">e</span>ct 4</h1>
+
+  
   <!-- One div for back of gameboard with 42 divs inside to represent each space on the board -->
   <div class="gameBoard">
     <!-- first class added for testing purposes -->
@@ -73,14 +77,27 @@
     <div class="space bottom"></div>
     <div class="space bottom"></div>
     <div class="space bottom"></div>
-  </div>
+          </div>
   
-     <button type="button" onclick="resetGame()">Reset</button>
   
- 
-    <button id="original" type="button" onclick="originalColor()">Original</button><br>
-    <button id="wsu" type="button" onclick="wsuColor()">WSU Colors</button><br>
+
+    <button id="original" type="button" onclick="originalColor()">Original</button>
+    <button id="wsu" type="button" onclick="wsuColor()">WSU Colors</button>
     <button id="sieaety" type="button" onclick="sieaetyColor()">Sieaety Colors</button>
+
+  
+    <div id="reset">
+      <p>
+        Current Player is: Player 1
+      </p>
+      <button  type="button" onclick="resetGame()">Reset</button>
+ </div>
+  
+
+
+
+  
+
  
 
 </body>

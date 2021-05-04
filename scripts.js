@@ -111,10 +111,12 @@ function updateSpace(colNumber, spaceNumber) {
     if (currentPlayer == 1) {
         spaces[allCol[colNumber][spaceNumber]].classList.add("p1", "filled");
         currentPlayer = 2;
+        document.querySelector("p").innerHTML = "Current Player is: Player " + currentPlayer;
     }
     else if (currentPlayer == 2) {
         spaces[allCol[colNumber][spaceNumber]].classList.add("p2", "filled");
         currentPlayer = 1;
+        document.querySelector("p").innerHTML = "Current Player is: Player " + currentPlayer;
     }
 }
 
@@ -199,9 +201,10 @@ winCombos = [
     [20, 26, 32, 38]
   ];
 
-
+//function for resetting the gameboard
 function resetGame() {
   currentPlayer = 1;
+  document.querySelector("p").innerHTML = "Current Player is: Player " + currentPlayer;
     for (let i = 0; i < spaces.length; i++) {
         spaces[i].classList.remove("p1", "p2", "filled");
     }
@@ -220,4 +223,10 @@ function wsuColor() {
 //function for changing color palette based on my personal brand
 function sieaetyColor() {
     document.querySelector("style").innerHTML = ".p1 { background-color: #12104f;} .p2 { background-color: #df983c;} .gameBoard { background-color: #727fac; border-color: #727fac;}";
+}
+
+
+//easter egg funciton requested by my brothers
+function easterEgg() {
+    alert("Congratulations! You found the easter egg by clicking on the letter 'e' in Connect 4. (This was insisted upon by my younger brothers)");
 }
