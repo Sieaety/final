@@ -1,4 +1,5 @@
-/*TO DO NEXT: start on winning function
+/*TO DO NEXT: fix errors
+-first part of if statement in placeChip is not running properly
 FIXED:Currently red mouseout works but also erases chips in filled spaces/Yellow mouseout doesn't work at all-
 tried splitting mouseover and mouseout into two seperate functions instead of if/else statement, not sure why this worked but it did
 FIXED:Won't place more than two chips in one column- 
@@ -30,7 +31,7 @@ for (let i = 0; i < spaces.length; i++) {
   spaces[i].onclick = function() {
     colNum(i)
   };
-
+  
 /*add player color class (class p1 or p2) to space when player hovers over it, if the spaces is already 
 filled the function returns as hovering colors only necessary on empty spaces*/
 spaces[i].onmouseover = function () {
@@ -81,8 +82,9 @@ function placeChip(colNumber) {
     available = i;
     //if it loops to the top space and it is filled then nothing happens
     if (i == 0 && spaces[allCol[colNumber][i]].classList.contains("filled")) {
-      break;
-
+      alert("This column is full! You can't go here!");
+      console.log("alert")
+        return;
     }
 
     /*Detects bottomost availble space and places chip by checking if i is filled and if 
@@ -193,3 +195,5 @@ winCombos = [
     [19, 25, 31, 37],
     [20, 26, 32, 38]
   ];
+
+
