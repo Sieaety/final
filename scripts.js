@@ -1,5 +1,6 @@
 /*TO DO NEXT: fix errors
--first part of if statement in placeChip is not running properly
+FIXED:first part of if statement in placeChip is not running properly-
+loop was set to stop for i > 0 so the condition of i == 0 was never fufilled, changed loop to i >= 0
 FIXED:Currently red mouseout works but also erases chips in filled spaces/Yellow mouseout doesn't work at all-
 tried splitting mouseover and mouseout into two seperate functions instead of if/else statement, not sure why this worked but it did
 FIXED:Won't place more than two chips in one column- 
@@ -78,7 +79,7 @@ function colNum(clickedSpace) {
 //function for detecting where to place the chip in the clicked column
 function placeChip(colNumber) {
   //loops through spaces in column from bottom to top (6 spaces: 5,4,3,2,1,0)
-  for (let i = 5; i > 0; i--) {
+  for (let i = 5; i >= 0; i--) {
     available = i;
     //if it loops to the top space and it is filled then nothing happens
     if (i == 0 && spaces[allCol[colNumber][i]].classList.contains("filled")) {
