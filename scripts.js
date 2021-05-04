@@ -1,8 +1,8 @@
-/*TO DO NEXT: fix errors
--Currently red mouseout works but also erases chips in filled spaces
--Yellow mouseout doesn't work at all
-FIXED:Only switches current player once from red to yellow and won't switch back or place any chips- 
-Set i to a variable so variable value could later be subtracted from without changing the value of i*/
+/*TO DO NEXT: start on winning function
+FIXED:Currently red mouseout works but also erases chips in filled spaces/Yellow mouseout doesn't work at all-
+tried splitting mouseover and mouseout into two seperate functions instead of if/else statement, not sure why this worked but it did
+FIXED:Won't place more than two chips in one column- 
+Set i to a variable (available) so variable value could later be subtracted from without changing the value of i*/
 
 currentPlayer = 1;
 
@@ -31,28 +31,31 @@ for (let i = 0; i < spaces.length; i++) {
     colNum(i)
   };
 
-  /*Attempting to fix mousover function, still not working
-    -Currently red mouseout works but also erases chips in filled spaces 
-    -Yellow mouseout doesn't work at all*/
-
-    
-    if (!spaces[i].classList.contains("filled")) {
-            if (currentPlayer == 1  && !spaces[i].classList.contains("filled")) {
-                spaces[i].onmouseover = function () {
+/*add player color class (class p1 or p2) to space when player hovers over it, if the spaces is already 
+filled the function returns as hovering colors only necessary on empty spaces*/
+spaces[i].onmouseover = function () {
+            if (spaces[i].classList.contains("filled")) {
+                return;
+            }
+            else {
+                if (currentPlayer == 1) {
                     spaces[i].classList.add("p1");
                 }
-                spaces[i].onmouseout = function () {
-                    spaces[i].classList.remove("p1");
+                else {
+                    spaces[i].classList.add("p2");
                 }
             }
 
-            else if (currentPlayer == 2  && !spaces[i].classList.contains("filled")) {
-                spaces[i].onmouseover = function () {
-                    spaces[i].classList.add("p2");
-                }
-                spaces[i].onmouseout = function () {
-                    spaces[i].classList.remove("p2");
-                }
+        }
+
+/*removes player's color (class p1 or p2) from empty space when they mouse of it, if the spaces is already 
+filled the function returns so filled spaces won't appear empty after player mouses over them*/
+        spaces[i].onmouseout = function () {
+            if (spaces[i].classList.contains("filled")) {
+                return;
+            }
+            else {
+                spaces[i].classList.remove("p1", "p2");
             }
         }
 
@@ -62,7 +65,6 @@ then should run a function for placing the chip in that column*/
 function colNum(clickedSpace) {
   for (let i = 0; i < allCol.length; i++) {
     if (allCol[i].includes(clickedSpace)) {
-      console.log("working?");
       placeChip(i);
       break;
 
@@ -77,24 +79,20 @@ function placeChip(colNumber) {
   //loops through spaces in column from bottom to top (6 spaces: 5,4,3,2,1,0)
   for (let i = 5; i > 0; i--) {
     available = i;
-    console.log(i);
     //if it loops to the top space and it is filled then nothing happens
     if (i == 0 && spaces[allCol[colNumber][i]].classList.contains("filled")) {
-      console.log("nani")
       break;
 
     }
 
     /*Detects bottomost availble space and places chip by checking if i is filled and if 
-    the spot above is not filled. If space above is not filled it will run function to update space with chip*/
+    the spot above (available) is not filled. If space above is not filled it will run function to update space with chip*/
     else if (spaces[allCol[colNumber][i]].classList.contains("filled") && !spaces[allCol[colNumber][available -= 1]].classList.contains("filled")) {
-      console.log("help");
       updateSpace(colNumber, available);
       break;
     }
     //if i is the bottom spot on the board and it isn't filled then run function for updating the space
     else if (!spaces[allCol[colNumber][i]].classList.contains("filled") && i == 5) {
-      console.log("death");
       updateSpace(colNumber, i);
 
       break;
@@ -108,11 +106,9 @@ function updateSpace(colNumber, spaceNumber) {
     if (currentPlayer == 1) {
         spaces[allCol[colNumber][spaceNumber]].classList.add("p1", "filled");
         currentPlayer = 2;
-      console.log("brownies");
     }
     else if (currentPlayer == 2) {
         spaces[allCol[colNumber][spaceNumber]].classList.add("p2", "filled");
         currentPlayer = 1;
-      console.log("bob");
     }
 }
