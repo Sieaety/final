@@ -216,3 +216,8 @@ function originalColor() {
 function wsuColor() {
     document.querySelector("style").innerHTML = ".p1 { background-color: #981e32;} .p2 { background-color: #5e6a71;} .gameBoard { background-color: #ffb81c; border-color: #ffb81c;}";
 }
+
+//function for changing color palette based on my personal brand
+function sieaetyColor() {
+    document.querySelector("style").innerHTML = ".p1 { background-color: #12104f;} .p2 { background-color: #df983c;} .gameBoard { background-color: #727fac; border-color: #727fac;}";
+}
