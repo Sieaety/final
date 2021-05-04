@@ -201,9 +201,18 @@ winCombos = [
 
 
 function resetGame() {
+  currentPlayer = 1;
     for (let i = 0; i < spaces.length; i++) {
         spaces[i].classList.remove("p1", "p2", "filled");
-        currentPlayer = 1;
     }
 }
 
+//function for changing color palette to original Connect 4 palette
+function originalColor() {
+    document.querySelector("style").innerHTML = ".p1 { background-color: #ff0000;} .p2 { background-color: #ffd000;} .gameBoard { background-color: #2054ff; border-color: #2054ff;}";
+}
+
+//function for changing color palette to WSU colors
+function wsuColor() {
+    document.querySelector("style").innerHTML = ".p1 { background-color: #981e32;} .p2 { background-color: #5e6a71;} .gameBoard { background-color: #ffb81c; border-color: #ffb81c;}";
+}
