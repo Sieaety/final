@@ -33,9 +33,11 @@ for (let i = 0; i < spaces.length; i++) {
     colNum(i)
   };
   
+
+        
 /*add player color class (class p1 or p2) to space when player hovers over it, if the spaces is already 
 filled the function returns as hovering colors only necessary on empty spaces*/
-spaces[i].onmouseover = function () {
+spaces[i].addEventListener("mouseover touchstart", function() {
             if (spaces[i].classList.contains("filled")) {
                 return;
             }
@@ -48,19 +50,20 @@ spaces[i].onmouseover = function () {
                 }
             }
 
-        }
+        });
 
 /*removes player's color (class p1 or p2) from empty space when they mouse of it, if the spaces is already 
 filled the function returns so filled spaces won't appear empty after player mouses over them*/
-        spaces[i].onmouseout = function () {
+        spaces[i].addEventListener("mouseout touchend", function() {
             if (spaces[i].classList.contains("filled")) {
                 return;
             }
             else {
                 spaces[i].classList.remove("p1", "p2");
             }
-        }
+        });
 
+ 
 }
 /*loops through columns to find the one that includes the space the player clicked on and 
 then should run a function for placing the chip in that column*/
@@ -110,18 +113,25 @@ function placeChip(colNumber) {
 function updateSpace(colNumber, spaceNumber) {
     if (currentPlayer == 1) {
         spaces[allCol[colNumber][spaceNumber]].classList.add("p1", "filled");
+      winCheck();
+      console.log("tornado");
         currentPlayer = 2;
         document.querySelector("p").innerHTML = "Current Player is: Player " + currentPlayer;
     }
     else if (currentPlayer == 2) {
         spaces[allCol[colNumber][spaceNumber]].classList.add("p2", "filled");
+            winCheck();
         currentPlayer = 1;
         document.querySelector("p").innerHTML = "Current Player is: Player " + currentPlayer;
     }
 }
 
 //array of arrays listing all the possible combinations of winning spots on the board
-winCombos = [
+
+
+function winCheck(){
+  
+  const winCombos = [
   
     //horizontal combinations
     [0, 1, 2, 3],
@@ -152,13 +162,13 @@ winCombos = [
   //vertical combinations
     [0, 7, 14, 21],
     [7, 14, 21, 28],
-    [14, 31, 28, 35],
+    [14, 21, 28, 35],
     [1, 8, 15, 22],
     [8, 15, 22, 29],
     [15, 22, 29, 36],
     [2, 9, 16, 23],
     [9, 16, 23, 30],
-    [16, 23, 20, 37],
+    [16, 23, 30, 37],
     [3, 10, 17, 24],
     [10, 17, 24, 31],
     [17, 24, 31, 38],
@@ -199,7 +209,36 @@ winCombos = [
     [13, 19, 25, 31],
     [19, 25, 31, 37],
     [20, 26, 32, 38]
-  ];
+  ]
+ 
+  for (let i = 0; i < winCombos.length; i++) {
+    for (let ii = 0; ii < winCombos[i].length; ii++){
+      if (currentPlayer == 1) {
+        if (!spaces[winCombos[i][ii]].classList.contains("p1", "filled")) {
+
+          break; }
+        if (ii == 3) {
+          alert("Player 1 wins!");
+          resetGame();
+        }
+   
+      }
+        else if (currentPlayer == 2) {
+         console.log("why");
+        if (!spaces[winCombos[i][ii]].classList.contains("p1", "filled"))
+          break;
+                 if (ii == 3) {
+          alert("Player 2 wins!");
+          resetGame();
+        }
+
+      }
+
+    }
+  }
+  
+}
+
 
 //function for resetting the gameboard
 function resetGame() {
