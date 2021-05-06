@@ -118,7 +118,7 @@ p {
   font-size: 1.25vw;
 }
 
-@media only screen and (max-width: 1242px) {
+@media only screen and (max-width: 1200px) and (orientation: portrait) {
   .gameBoard {
     height: 50vw;
     width: 55vw;
@@ -159,6 +159,8 @@ p {
     right: 5vw;
     top: 21vw;
   }
+ 
+
   @media only screen and (max-width: 768px) {
     .gameBoard {
       height: 60vw;

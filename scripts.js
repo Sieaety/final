@@ -32,38 +32,35 @@ for (let i = 0; i < spaces.length; i++) {
   spaces[i].onclick = function() {
     colNum(i)
   };
-  
 
-        
-/*add player color class (class p1 or p2) to space when player hovers over it, if the spaces is already 
-filled the function returns as hovering colors only necessary on empty spaces*/
-spaces[i].addEventListener("mouseover touchstart", function() {
-            if (spaces[i].classList.contains("filled")) {
-                return;
-            }
-            else {
-                if (currentPlayer == 1) {
-                    spaces[i].classList.add("p1");
-                }
-                else {
-                    spaces[i].classList.add("p2");
-                }
-            }
 
-        });
 
-/*removes player's color (class p1 or p2) from empty space when they mouse of it, if the spaces is already 
-filled the function returns so filled spaces won't appear empty after player mouses over them*/
-        spaces[i].addEventListener("mouseout touchend", function() {
-            if (spaces[i].classList.contains("filled")) {
-                return;
-            }
-            else {
-                spaces[i].classList.remove("p1", "p2");
-            }
-        });
+  /*add player color class (class p1 or p2) to space when player hovers over it, if the spaces is already 
+  filled the function returns as hovering colors only necessary on empty spaces*/
+  spaces[i].onmousover = function() {
+    if (spaces[i].classList.contains("filled")) {
+      return;
+    } else {
+      if (currentPlayer == 1) {
+        spaces[i].classList.add("p1");
+      } else {
+        spaces[i].classList.add("p2");
+      }
+    }
 
- 
+  }
+
+  /*removes player's color (class p1 or p2) from empty space when they mouse of it, if the spaces is already 
+  filled the function returns so filled spaces won't appear empty after player mouses over them*/
+  spaces[i].onmouseout = function() {
+    if (spaces[i].classList.contains("filled")) {
+      return;
+    } else {
+      spaces[i].classList.remove("p1", "p2");
+    }
+  }
+
+
 }
 /*loops through columns to find the one that includes the space the player clicked on and 
 then should run a function for placing the chip in that column*/
@@ -81,16 +78,16 @@ function colNum(clickedSpace) {
 
 //function for detecting where to place the chip in the clicked column
 function placeChip(colNumber) {
-  
+
   //loops through spaces in column from bottom to top (6 spaces: 5,4,3,2,1,0)
   for (let i = 5; i >= 0; i--) {
     available = i;
-    
+
     //if it loops to the top space and it is filled then nothing happens
     if (i == 0 && spaces[allCol[colNumber][i]].classList.contains("filled")) {
       alert("This column is full! You can't go here!");
       console.log("alert")
-        return;
+      return;
     }
 
     /*Detects bottomost availble space and places chip by checking if i is filled and if 
@@ -99,7 +96,7 @@ function placeChip(colNumber) {
       updateSpace(colNumber, available);
       break;
     }
-    
+
     //if i is the bottom spot on the board and it isn't filled then run function for updating the space
     else if (!spaces[allCol[colNumber][i]].classList.contains("filled") && i == 5) {
       updateSpace(colNumber, i);
@@ -111,28 +108,28 @@ function placeChip(colNumber) {
 
 //updates available space (found with placeChip function) with player color and filled class, and changes current player
 function updateSpace(colNumber, spaceNumber) {
-    if (currentPlayer == 1) {
-        spaces[allCol[colNumber][spaceNumber]].classList.add("p1", "filled");
-      winCheck();
-      console.log("tornado");
-        currentPlayer = 2;
-        document.querySelector("p").innerHTML = "Current Player is: Player " + currentPlayer;
-    }
-    else if (currentPlayer == 2) {
-        spaces[allCol[colNumber][spaceNumber]].classList.add("p2", "filled");
-            winCheck();
-        currentPlayer = 1;
-        document.querySelector("p").innerHTML = "Current Player is: Player " + currentPlayer;
-    }
+  if (currentPlayer == 1) {
+    spaces[allCol[colNumber][spaceNumber]].classList.add("p1", "filled");
+   
+    currentPlayer = 2;
+    document.querySelector("p").innerHTML = "Current Player is: Player " + currentPlayer;
+  } else if (currentPlayer == 2) {
+    spaces[allCol[colNumber][spaceNumber]].classList.add("p2", "filled");
+
+    currentPlayer = 1;
+    document.querySelector("p").innerHTML = "Current Player is: Player " + currentPlayer;
+  }
+   ifWin = winCheck();
+    if (ifWin == true){            resetGame();return;}
 }
 
 //array of arrays listing all the possible combinations of winning spots on the board
 
 
-function winCheck(){
-  
-  const winCombos = [
-  
+function winCheck() {
+
+  winCombos = [
+
     //horizontal combinations
     [0, 1, 2, 3],
     [1, 2, 3, 4],
@@ -158,8 +155,8 @@ function winCheck(){
     [36, 37, 38, 39],
     [37, 38, 39, 40],
     [38, 39, 40, 41],
-  
-  //vertical combinations
+
+    //vertical combinations
     [0, 7, 14, 21],
     [7, 14, 21, 28],
     [14, 21, 28, 35],
@@ -210,33 +207,36 @@ function winCheck(){
     [19, 25, 31, 37],
     [20, 26, 32, 38]
   ]
- 
+
   for (let i = 0; i < winCombos.length; i++) {
-    for (let ii = 0; ii < winCombos[i].length; ii++){
+    for (let ii = 0; ii < winCombos[i].length; ii++) {
       if (currentPlayer == 1) {
         if (!spaces[winCombos[i][ii]].classList.contains("p1", "filled")) {
-
-          break; }
-        if (ii == 3) {
-          alert("Player 1 wins!");
-          resetGame();
-        }
-   
-      }
-        else if (currentPlayer == 2) {
-         console.log("why");
-        if (!spaces[winCombos[i][ii]].classList.contains("p1", "filled"))
           break;
-                 if (ii == 3) {
-          alert("Player 2 wins!");
-          resetGame();
+        }
+        if (ii == 3) {
+          alert("Player 1 wins! Game has been reset.")
+
+            return true;
+
+          
         }
 
-      }
+      } else if (currentPlayer == 2) {
+        if (!spaces[winCombos[i][ii]].classList.contains("p2", "filled"))
+          break;
 
+        if (ii == 3) {
+          alert("Player 2 wins! Game has been reset.") 
+
+            return true;    
+
+        }
+      }
     }
+
   }
-  
+  return false;
 }
 
 
@@ -244,28 +244,28 @@ function winCheck(){
 function resetGame() {
   currentPlayer = 1;
   document.querySelector("p").innerHTML = "Current Player is: Player " + currentPlayer;
-    for (let i = 0; i < spaces.length; i++) {
-        spaces[i].classList.remove("p1", "p2", "filled");
-    }
+  for (let i = 0; i < spaces.length; i++) {
+    spaces[i].classList.remove("p1", "p2", "filled");
+  }
 }
 
 //function for changing color palette to original Connect 4 palette
 function originalColor() {
-    document.querySelector("style").innerHTML = ".p1 { background-color: #ff0000;} .p2 { background-color: #ffd000;} .gameBoard { background-color: #2054ff; border-color: #2054ff;}";
+  document.querySelector("style").innerHTML = ".p1 { background-color: #ff0000;} .p2 { background-color: #ffd000;} .gameBoard { background-color: #2054ff; border-color: #2054ff;}";
 }
 
 //function for changing color palette to WSU colors
 function wsuColor() {
-    document.querySelector("style").innerHTML = ".p1 { background-color: #981e32;} .p2 { background-color: #5e6a71;} .gameBoard { background-color: #ffb81c; border-color: #ffb81c;}";
+  document.querySelector("style").innerHTML = ".p1 { background-color: #981e32;} .p2 { background-color: #5e6a71;} .gameBoard { background-color: #ffb81c; border-color: #ffb81c;}";
 }
 
 //function for changing color palette based on my personal brand
 function sieaetyColor() {
-    document.querySelector("style").innerHTML = ".p1 { background-color: #12104f;} .p2 { background-color: #df983c;} .gameBoard { background-color: #727fac; border-color: #727fac;}";
+  document.querySelector("style").innerHTML = ".p1 { background-color: #12104f;} .p2 { background-color: #df983c;} .gameBoard { background-color: #727fac; border-color: #727fac;}";
 }
 
 
 //easter egg funciton requested by my brothers
 function easterEgg() {
-    alert("Congratulations! You found the easter egg by clicking on the letter 'e' in Connect 4. (This was insisted upon by my younger brothers)");
+  alert("Congratulations! You found the easter egg by clicking on the letter 'e' in Connect 4. (This was insisted upon by my younger brothers)");
 }
