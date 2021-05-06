@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Denk+One&family=Rubik&display=swap');
 
+
+
 /*gameboard background/blue area*/
 
 .gameBoard {
@@ -13,6 +15,9 @@
   border: 1vw solid;
   border-color: #2054ff;
 }
+
+
+
 
 /*individual spaces within board*/
 
@@ -31,6 +36,9 @@ h1 {
   margin-bottom: 1vw;
 }
 
+
+
+
 /*classes for changing space color based on current player*/
 
 .p1 {
@@ -40,6 +48,12 @@ h1 {
 .p2 {
   background-color: #ffd000;
 }
+
+
+
+
+
+/*styling for buttons*/
 
 button {
   margin-bottom: 1vw;
@@ -94,13 +108,6 @@ button {
   background-color: #636363;
 }
 
-#reset {
-  position: absolute;
-  right: 31.5vw;
-  top: 42.5vw;
-  width: 37vw;
-}
-
 #reset button {
   float: right;
   margin-right: 0;
@@ -108,6 +115,18 @@ button {
   color: #fff;
   border: none;
   border-radius: 2px;
+}
+
+
+
+
+/*styling for reset div with current player and reset button*/
+
+#reset {
+  position: absolute;
+  right: 31.5vw;
+  top: 42.5vw;
+  width: 37vw;
 }
 
 p {
@@ -118,12 +137,18 @@ p {
   font-size: 1.25vw;
 }
 
+
+
+
+
+
+/*from here on out styling adjusting the positioning and sizing of gameboard elements and buttons to appear better on smaller devices*/
+
 @media only screen and (max-width: 1200px) and (orientation: portrait) {
   .gameBoard {
     height: 50vw;
     width: 55vw;
   }
-  /*individual spaces within board*/
   .space {
     height: 7.11vw;
     width: 7.11vw;
@@ -159,14 +184,15 @@ p {
     right: 5vw;
     top: 21vw;
   }
- 
-
+  
+  
+  
+  
   @media only screen and (max-width: 768px) {
     .gameBoard {
       height: 60vw;
       width: 65vw;
     }
-    /*individual spaces within board*/
     .space {
       height: 8.53vw;
       width: 8.53vw;
@@ -198,12 +224,14 @@ p {
       left: 40vw;
       top: 85vw;
     }
+    
+    
+    
     @media only screen and (max-width: 460px) {
       .gameBoard {
         height: 80vw;
         width: 85vw;
       }
-      /*individual spaces within board*/
       .space {
         height: 11.15vw;
         width: 11.15vw;
@@ -239,6 +267,9 @@ p {
         left: 35.25vw;
         top: 130vw;
       }
+      
+      
+      
       @media only screen and (max-width: 332px) {
         #sieaety {
           position: absolute;

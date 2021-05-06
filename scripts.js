@@ -1,8 +1,17 @@
-/*TO DO NEXT: winning function
+/*
+BUGGED: when a player places a fourth chip in a row the winning message doesn't appear until they 
+click a second time on the board. This was better than having the chip never show up before the board was reset but it really isn't ideal. 
+However, if they click on a full column the full column alert will show up instead of win alert so they have to click again not on a full column for the win alert to show
+
 FIXED:first part of if statement in placeChip is not running properly-
 loop was set to stop for i > 0 so the condition of i == 0 was never fufilled, changed loop to i >= 0
-FIXED:Currently red mouseout works but also erases chips in filled spaces/Yellow mouseout doesn't work at all-
-tried splitting mouseover and mouseout into two seperate functions instead of if/else statement, not sure why this worked but it did
+
+
+REMOVED: (FIXED:Currently red mouseout works but also erases chips in filled spaces/Yellow mouseout doesn't work at all-
+tried splitting mouseover and mouseout into two seperate functions instead of if/else statement, not sure why this worked but it did)
+-because mouseover and mouseout can't work properly on touchscreen devices there was issues with spaces looking filled when they weren't actually causing confusion for the player
+
+
 FIXED:Won't place more than two chips in one column- 
 Set i to a variable (available) so variable value could later be subtracted from without changing the value of i*/
 
@@ -110,7 +119,7 @@ function placeChip(colNumber) {
 function updateSpace(colNumber, spaceNumber) {
   if (currentPlayer == 1) {
     spaces[allCol[colNumber][spaceNumber]].classList.add("p1", "filled");
-   
+
     currentPlayer = 2;
     document.querySelector("p").innerHTML = "Current Player is: Player " + currentPlayer;
   } else if (currentPlayer == 2) {
@@ -119,17 +128,24 @@ function updateSpace(colNumber, spaceNumber) {
     currentPlayer = 1;
     document.querySelector("p").innerHTML = "Current Player is: Player " + currentPlayer;
   }
-   ifWin = winCheck();
-    if (ifWin == true){            resetGame();return;}
+  
+  //calls winning funcion and resets game if true
+  ifWin = winCheck();
+  if (ifWin == true) {
+    resetGame();
+    return;
+  }
 }
 
-//array of arrays listing all the possible combinations of winning spots on the board
 
 
+//function for checking for a win
 function winCheck() {
 
   winCombos = [
 
+    //array of arrays listing all the possible combinations of winning spots on the board
+    
     //horizontal combinations
     [0, 1, 2, 3],
     [1, 2, 3, 4],
@@ -208,34 +224,43 @@ function winCheck() {
     [20, 26, 32, 38]
   ]
 
+  
+  //loops through winCombos and the loops though arrays within winCombos
   for (let i = 0; i < winCombos.length; i++) {
     for (let ii = 0; ii < winCombos[i].length; ii++) {
+      
+      //breaks out of second loop and continues through arrays in first loop if the spaces don't have the same player color and aren't filled
       if (currentPlayer == 1) {
         if (!spaces[winCombos[i][ii]].classList.contains("p1", "filled")) {
           break;
         }
+        
+        //if it went through entire second loop without breaking returns true because player won, alerts player of win
         if (ii == 3) {
           alert("Player 1 wins! Game has been reset.")
+          return true;
 
-            return true;
 
-          
         }
-
+        
+//breaks out of second loop and continues through arrays in first loop if the spaces don't have the same player color and aren't filled
       } else if (currentPlayer == 2) {
         if (!spaces[winCombos[i][ii]].classList.contains("p2", "filled"))
           break;
 
+        //if it went through entire second loop without breaking returns true because player won, alerts player of win
         if (ii == 3) {
-          alert("Player 2 wins! Game has been reset.") 
+          alert("Player 2 wins! Game has been reset.")
 
-            return true;    
+          return true;
 
         }
       }
     }
 
   }
+  
+  //if it went through the entire first loop returns false because no one won
   return false;
 }
 

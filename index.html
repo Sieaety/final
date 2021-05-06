@@ -23,19 +23,13 @@
 </head>
 
 <body>
-  
 
-  
 
+  <!-- span on letter e for running easter egg function -->
   <h1>Conn<span onclick="easterEgg()">e</span>ct 4</h1>
-  
-  
 
-  
   <!-- One div for back of gameboard with 42 divs inside to represent each space on the board -->
   <div class="gameBoard">
-    <!-- first class added for testing purposes -->
-    <div class="space first"></div>
     <div class="space"></div>
     <div class="space"></div>
     <div class="space"></div>
@@ -70,37 +64,29 @@
     <div class="space"></div>
     <div class="space"></div>
     <div class="space"></div>
-
-    <!-- bottom class to repesent bottom row of board for selecting with javascript -->
-    <div class="space bottom"></div>
-    <div class="space bottom"></div>
-    <div class="space bottom"></div>
-    <div class="space bottom"></div>
-    <div class="space bottom"></div>
-    <div class="space bottom"></div>
-    <div class="space bottom"></div>
-          </div>
-  
-  
-
-    <button id="original" type="button" onclick="originalColor()">Original</button>
-    <button id="wsu" type="button" onclick="wsuColor()">WSU Colors</button>
-    <button id="sieaety" type="button" onclick="sieaetyColor()">Sieaety Colors</button>
-
-  
-    <div id="reset">
-      <p>
-        Current Player is: Player 1
-      </p>
-      <button  type="button" onclick="resetGame()">Reset</button>
- </div>
-  
+    <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
+  </div>
 
 
+  <!-- buttons for changing color schemes -->
+  <button id="original" type="button" onclick="originalColor()">Original</button>
+  <button id="wsu" type="button" onclick="wsuColor()">WSU Colors</button>
+  <button id="sieaety" type="button" onclick="sieaetyColor()">Sieaety Colors</button>
 
-  
-
- 
+  <!-- div for displaying current player and reset button -->
+  <div id="reset">
+    <p>
+      Current Player is: Player 1
+    </p>
+    <button type="button" onclick="resetGame()">Reset</button>
+  </div>
 
 </body>
 
