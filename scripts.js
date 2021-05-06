@@ -1,4 +1,7 @@
 /*
+ONLINE TUTORIAL: I didn’t follow this tutorial directly since it was privated before I started the project but did take the idea of using winning arrays from it.
+https://www.youtube.com/watch?v=dBlSiGOFjUY
+
 BUGGED: when a player places a fourth chip in a row the winning message doesn't appear until they 
 click a second time on the board. This was better than having the chip never show up before the board was reset but it really isn't ideal. 
 However, if they click on a full column the full column alert will show up instead of win alert so they have to click again not on a full column for the win alert to show
@@ -6,11 +9,9 @@ However, if they click on a full column the full column alert will show up inste
 FIXED:first part of if statement in placeChip is not running properly-
 loop was set to stop for i > 0 so the condition of i == 0 was never fufilled, changed loop to i >= 0
 
-
 REMOVED: (FIXED:Currently red mouseout works but also erases chips in filled spaces/Yellow mouseout doesn't work at all-
 tried splitting mouseover and mouseout into two seperate functions instead of if/else statement, not sure why this worked but it did)
 -because mouseover and mouseout can't work properly on touchscreen devices there was issues with spaces looking filled when they weren't actually causing confusion for the player
-
 
 FIXED:Won't place more than two chips in one column- 
 Set i to a variable (available) so variable value could later be subtracted from without changing the value of i*/
